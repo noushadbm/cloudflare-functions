@@ -1,0 +1,2 @@
+- Locally run the development server npm run start
+- Deploy your application npm run deploy
