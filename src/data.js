@@ -1,4 +1,4 @@
 export default {
-	name: "Example API",
+	name: "Example API-1111",
 	tags: ["example", "api", "response"],
 };
