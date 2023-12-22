@@ -1,0 +1,4 @@
+name = "test-deployment"
+main = "src/index.js"
+compatibility_date = "2023-12-22"
+workers_dev = true
