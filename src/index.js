@@ -18,7 +18,34 @@ export default {
 		if (url.pathname === "/api") {
 			// You could also call a third party API here
 			const data = await import("./data.js");
-			return Response.json(data);
+			const command = url.searchParams.get('command');
+			const secret = url.searchParams.get('secret');
+			const message = url.searchParams.get('message');
+			if(command == 'notify' && secret == env.COMMAND_SECRET) {
+                const url = `https://api.telegram.org/bot${env.BOT_API_KEY}/sendMessage`;
+                const body = {
+                    chat_id: `${env.BOT_MSG_ID}`,
+                    text: message,
+                    disable_notification: false
+                };
+
+				const init = {
+					body: JSON.stringify(body),
+					method: "POST",
+					headers: {
+					  "content-type": "application/json;charset=UTF-8",
+					},
+				};
+
+				await fetch(url, init);
+				return Response.json({status: "Success"});
+
+			} else {
+				//data.message = `test-${command}`;
+			    //console.log(`Msg id: ${env.BOT_MSG_ID}`);
+			    return Response.json(data);
+			}
+			
 		}
 		return new Response(welcome, {
 			headers: {
